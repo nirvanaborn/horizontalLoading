@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <title>Horizontal Loading</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+      }
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+      .animate {
+        animation: loading 2000ms;
+      }
+      .c1 {
+        background-color: #4aa;
+      }
+      .c2 {
+        background-color: #81a;
+      }
+      .c3 {
+        background-color: #f1a;
+      }
+      .c4 {
+        background-color: #0fa;
+      }
+      .c5 {
+        background-color: #f05;
+      }
+      .d1 {
+        animation-delay: 0ms;
+      }
+      .d2 {
+        animation-delay: 200ms;
+      }
+      .d3 {
+        animation-delay: 400ms;
+      }
+      .d4 {
+        animation-delay: 600ms;
+      }
+      .d5 {
+        animation-delay: 800ms;
+      }
+      @keyframes loading {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="circle c3"></div>
+      <div class="circle c4"></div>
+      <div class="circle c5"></div>
+    </div>
+    <script>
+      var circleList = document.getElementsByClassName("circle");
+      circleList = Array.from(circleList);
+      setInterval(() => {
+        circleList.forEach((circle, idx) => {
+            console.log(idx+1);
+          circle.classList.add("animate", `d${idx + 1}`);
+          circle.addEventListener("animationend", function () {
+            circle.classList.remove("animate", `d${idx + 1}`);
+          });
+        });
+        circleList.reverse();
+      }, 3000);
+    </script>
+  </body>
+</html>
